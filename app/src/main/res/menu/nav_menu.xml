@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<item
+    android:id="@+id/HomeFragment"
+    android:icon="@drawable/ic_baseline_home_24"
+    android:title="Home"/>
+
+    <item
+        android:id="@+id/RadioFragment"
+        android:icon="@drawable/ic_baseline_radio_24"
+        android:title="Radio"/>
+
+    <item
+        android:id="@+id/BluetoothFragment"
+        android:icon="@drawable/ic_baseline_devices_24"
+        android:title="Device list"/>
+</menu>
