@@ -14,7 +14,8 @@ class RadioFragment : Fragment() {
     private val binding get() = _binding!!
 
     private var mediaPlayer: MediaPlayer? = null
-    private val radioUrl = "https://streaming.brol.tech/rtfmlounge"
+    //private val radioUrl = "https://streaming.brol.tech/rtfmlounge"
+    private val radioUrl = "https://listen.moe/stream"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +41,14 @@ class RadioFragment : Fragment() {
     private fun playRadio() {
         if (mediaPlayer == null) {
             mediaPlayer = MediaPlayer().apply {
+
+                setAudioAttributes(
+                    android.media.AudioAttributes.Builder()
+                        .setContentType(android.media.AudioAttributes.CONTENT_TYPE_MUSIC)
+                        .setUsage(android.media.AudioAttributes.USAGE_MEDIA)
+                        .build()
+                )
+
                 setDataSource(radioUrl)
                 setOnPreparedListener { start() }
                 prepareAsync()
@@ -51,11 +60,5 @@ class RadioFragment : Fragment() {
         mediaPlayer?.stop()
         mediaPlayer?.release()
         mediaPlayer = null
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        stopRadio()
-        _binding = null
     }
 }
