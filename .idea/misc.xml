@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/SweetSmartHome/app/src/debug/res/drawable/ic_launcher_background.xml" value="0.251" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.203" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/drawable/ic_baseline_radio_24.xml" value="0.262" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/drawable/ic_launcher_background.xml" value="0.203" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/activitiy_start.xml" value="0.3691123188405797" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/activity_start.xml" value="0.3691123188405797" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/content_main.xml" value="0.26811594202898553" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/content_start.xml" value="0.3691123188405797" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_first.xml" value="0.26811594202898553" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_main.xml" value="0.33" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_radio.xml" value="0.33" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_second.xml" value="0.26811594202898553" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/radio_fragment.xml" value="0.3691123188405797" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/test.xml" value="0.3691123188405797" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/menu/menu_main.xml" value="0.37447916666666664" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/menu/nav_menu.xml" value="0.37447916666666664" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/debug/res/drawable/ic_launcher_background.xml" value="0.203" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/drawable/ic_baseline_bluetooth_24.xml" value="0.2465" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/drawable/ic_baseline_manage_search_24.xml" value="0.2465" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/layout/activity_base.xml" value="0.24114583333333334" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/layout/fragment_device_list.xml" value="0.5" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/layout/fragment_list.xml" value="0.33" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/layout/list_item.xml" value="0.5" />
+        <entry key="..\:/SweetSmartHome/bt_def/src/main/res/layout/test1.xml" value="0.3691123188405797" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
