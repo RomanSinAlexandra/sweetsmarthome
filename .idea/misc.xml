@@ -15,8 +15,17 @@
         <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_first.xml" value="0.26811594202898553" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_main.xml" value="0.33" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_radio.xml" value="0.33" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_radio_control.xml" value="0.25" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_radio_list.xml" value="0.3691123188405797" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/layout/fragment_second.xml" value="0.26811594202898553" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/item_image.xml" value="0.37273550724637683" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/item_list.xml" value="0.37273550724637683" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/item_page.xml" value="0.37273550724637683" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/item_radio.xml" value="0.5" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/item_radio_station.xml" value="0.24114583333333334" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/radio_controller.xml" value="0.3691123188405797" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/layout/radio_fragment.xml" value="0.3691123188405797" />
+        <entry key="..\:/SweetSmartHome/app/src/main/res/layout/radio_fragment_list.xml" value="0.3691123188405797" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/layout/test.xml" value="0.3691123188405797" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/menu/menu_main.xml" value="0.37447916666666664" />
         <entry key="..\:/SweetSmartHome/app/src/main/res/menu/nav_menu.xml" value="0.37447916666666664" />

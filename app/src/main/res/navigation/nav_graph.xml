@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/RadioFragment"
-        android:name="com.example.sweetsmarthome.RadioFragment"
+        android:name="com.example.sweetsmarthome.radio.RadioFragment"
         android:label="Radio"
         tools:layout="@layout/fragment_radio" />
 
