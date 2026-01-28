@@ -36,6 +36,17 @@ class RadioViewModel : ViewModel() {
         }
     }
 
+    fun selectRandomStation() {
+        if (stations.isEmpty()) return
+
+        val randomStation = stations.random()
+        if (randomStation != _currentStation.value) {
+            selectStation(randomStation)
+        } else {
+            selectRandomStation()
+        }
+    }
+
     fun selectStation(station: RadioStation) {
         currentIndex = stations.indexOf(station)
         _currentStation.value = station

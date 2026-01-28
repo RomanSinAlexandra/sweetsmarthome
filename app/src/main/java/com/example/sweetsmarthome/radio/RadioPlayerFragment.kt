@@ -6,6 +6,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -18,7 +19,9 @@ class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
     private lateinit var playButton: ImageButton
     private lateinit var btNext: ImageButton
     private lateinit var btPrev: ImageButton
+    private lateinit var btRandom: ImageButton
     private lateinit var rotateAnim: Animation
+    private lateinit var tvTitleRadio: TextView
 
     private val viewModel: RadioViewModel by activityViewModels()
 
@@ -29,15 +32,11 @@ class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
         playButton = view.findViewById(R.id.btPlay)
         btNext = view.findViewById(R.id.btNext)
         btPrev = view.findViewById(R.id.btPrev)
+        btRandom = view.findViewById(R.id.btRandom)
+        tvTitleRadio = view.findViewById(R.id.tvTitleRadio)
 
         rotateAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate).apply {
             repeatCount = Animation.INFINITE
-        }
-
-        if (viewModel.isPlaying.value == true) {
-            cover.startAnimation(rotateAnim)
-        } else {
-            cover.clearAnimation()
         }
 
         viewModel.isPlaying.observe(viewLifecycleOwner) { playing ->
@@ -56,8 +55,8 @@ class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
         }
 
         viewModel.currentStation.observe(viewLifecycleOwner) { station ->
+            tvTitleRadio.text = station.name
             cover.setImageResource(station.iconRadio)
-            // Если радио играет — запуск анимации
             if (viewModel.isPlaying.value == true) {
                 cover.startAnimation(rotateAnim)
             }
@@ -65,9 +64,10 @@ class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
 
         btNext.setOnClickListener { viewModel.next() }
         btPrev.setOnClickListener { viewModel.prev() }
+        playButton.setOnClickListener { viewModel.togglePlayPause() }
 
-        playButton.setOnClickListener {
-            viewModel.togglePlayPause()
+        btRandom.setOnClickListener {
+            viewModel.selectRandomStation()
         }
 
         viewModel.errorEvent.observe(viewLifecycleOwner) { message ->
