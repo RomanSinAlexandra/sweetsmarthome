@@ -252,7 +252,7 @@ object RadioStations {
         ),
         RadioStation(
             "1940s radio staion",
-            "http://uk3.internet-radio.com:8082/live",
+            "http://uk3.internet-radio.com:8082/live.m3u",
             R.drawable.ic_radio_1940_radios
         )
     )
