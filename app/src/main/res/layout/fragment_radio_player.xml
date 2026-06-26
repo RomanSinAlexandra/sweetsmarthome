@@ -5,68 +5,91 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:padding="24dp"
+    android:background="@drawable/radio_bg">
 
-    <ImageView
-        android:id="@+id/cover"
+    <androidx.cardview.widget.CardView
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:scaleType="centerCrop"
-        android:background="@drawable/ic_radio_anime"
-        android:contentDescription="Radio cover"
-        android:src="@drawable/ic_radio_anime" />
+        app:cardCornerRadius="110dp"
+        app:cardElevation="8dp"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_radio_anime"
+            android:contentDescription="Radio cover"
+            android:src="@drawable/ic_radio_anime" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvTitleRadio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="Radio text"
-        android:textColor="@android:color/black"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Radio text"
+        android:textColor="@color/purple_white"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:shadowColor="#000000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="8" />
+
+    <!-- Панель управления плеером -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center">
 
         <ImageButton
             android:id="@+id/btPrev"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_baseline_skip_previous_24" />
 
         <ImageButton
             android:id="@+id/btPlay"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="16dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_baseline_play_arrow_24" />
 
         <ImageButton
             android:id="@+id/btNext"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:padding="12dp"
+            android:scaleType="fitCenter"
             android:background="?attr/selectableItemBackgroundBorderless"
 
             app:srcCompat="@drawable/ic_baseline_skip_next_24" />
 
         <ImageButton
             android:id="@+id/btRandom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
             android:contentDescription="Random Station"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_baseline_shuffle_24" />
+            android:width="2dp"
+            android:color="#000000"
+            app:srcCompat="@drawable/ic_baseline_shuffle_24" />
 
     </LinearLayout>
 

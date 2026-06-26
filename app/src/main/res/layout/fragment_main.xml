@@ -4,19 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/violet"
+    android:background="@drawable/main_bg"
     tools:context=".MainFragment">
 
     <TextView
-        android:id="@+id/tvStatus"
+        android:id="@+id/tvHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="56dp"
-        android:text="@string/hello_first_fragment"
+        android:text="Welcome back!"
+        android:textSize="24sp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bConnect"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green"
+        android:text="Connect"
+        app:layout_constraintBottom_toTopOf="@+id/bList"
+        app:layout_constraintEnd_toEndOf="@+id/bList"
+        app:layout_constraintStart_toStartOf="@+id/bList" />
+
+    <Button
+        android:id="@+id/bSend"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Light"
+        app:layout_constraintBottom_toTopOf="@+id/bConnect"
+        app:layout_constraintEnd_toEndOf="@+id/bConnect"
+        app:layout_constraintStart_toStartOf="@+id/bConnect" />
 
     <Button
         android:id="@+id/bList"
@@ -24,20 +45,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/purple_500"
         android:text="bt list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/bConnect"
+        android:id="@+id/bFireplace"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Connect"
-        app:layout_constraintBottom_toTopOf="@+id/bList"
-        app:layout_constraintEnd_toEndOf="@+id/bList"
-        app:layout_constraintStart_toStartOf="@+id/bList" />
-
+        android:text="Fireplace"
+        app:layout_constraintBottom_toTopOf="@+id/bSend"
+        app:layout_constraintEnd_toEndOf="@+id/bSend"
+        app:layout_constraintStart_toStartOf="@+id/bSend" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

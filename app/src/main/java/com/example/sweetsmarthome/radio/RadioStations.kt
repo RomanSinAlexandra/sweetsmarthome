@@ -1,6 +1,7 @@
 package com.example.sweetsmarthome.radio
 
 import com.example.sweetsmarthome.R
+import com.google.android.gms.common.util.CollectionUtils.listOf
 
 
 object RadioStations {
@@ -252,7 +253,7 @@ object RadioStations {
         ),
         RadioStation(
             "1940s radio staion",
-            "http://uk3.internet-radio.com:8082/live.m3u",
+            "http://solid2.streamupsolutions.com:24929/stream",
             R.drawable.ic_radio_1940_radios
         )
     )

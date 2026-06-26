@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/yor">
+    android:background="@drawable/device_bg">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -13,6 +13,8 @@
         android:layout_marginStart="3dp"
         android:layout_marginTop="3dp"
         android:layout_marginEnd="3dp"
+        app:cardBackgroundColor="@color/gray_transparent"
+        app:cardElevation="0dp"
         app:cardCornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +23,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#000000"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -34,7 +35,7 @@
                 android:layout_marginBottom="9dp"
                 android:layout_weight="0"
                 android:text="@string/paired_device"
-                android:textColor="@color/white_yellow" />
+                android:textColor="@color/white" />
 
             <ImageButton
                 android:id="@+id/imBluetoothOn"
@@ -53,6 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
+        app:cardBackgroundColor="@color/gray_transparent"
+        app:cardElevation="0dp"
         app:cardCornerRadius="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +64,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#020202"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -74,7 +76,7 @@
                 android:layout_marginBottom="9dp"
                 android:layout_weight="0"
                 android:text="@string/search_device"
-                android:textColor="@color/white_yellow" />
+                android:textColor="@color/white" />
 
             <ProgressBar
                 android:id="@+id/pbSearch"
@@ -135,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="@+id/rcViewPaired"
@@ -147,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/empty"
-        android:textColor="@color/blue"
+        android:textColor="@color/white"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@+id/rcViewSearch"
         app:layout_constraintEnd_toEndOf="parent"

@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetsmarthome.R
 
@@ -14,9 +16,11 @@ class RadioAdapter(
 ) : RecyclerView.Adapter<RadioAdapter.VH>() {
 
     private var selectedStation: RadioStation? = null
+    private var isPlaying: Boolean = false
 
-    fun setSelectedStation(station: RadioStation) {
+    fun setStatus(station: RadioStation?, playing: Boolean) {
         selectedStation = station
+        isPlaying = playing
         notifyDataSetChanged()
     }
 
@@ -28,11 +32,23 @@ class RadioAdapter(
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         val station = stations[position]
+        val context = holder.itemView.context
 
         holder.title.text = station.name
         holder.icon.setImageResource(station.iconRadio)
 
-        holder.itemView.isSelected = station == selectedStation
+        if (station == selectedStation) {
+            // Выделяем выбранную станцию
+            holder.container.setBackgroundColor(ContextCompat.getColor(context, R.color.purple_700))
+
+            // Если выбрана и играет -> Green (соединение есть), иначе Red (пауза)
+            val indicatorColor = if (isPlaying) R.color.green else R.color.red
+            holder.indicator.setCardBackgroundColor(ContextCompat.getColor(context, indicatorColor))
+        } else {
+            // Обычное состояние для невыбранных станций
+            holder.container.setBackgroundResource(R.drawable.bg_radio_item)
+            holder.indicator.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray_transparent))
+        }
 
         holder.itemView.setOnClickListener {
             onClick(station)
@@ -45,6 +61,6 @@ class RadioAdapter(
         val title: TextView = view.findViewById(R.id.tvTitle)
         val icon: ImageView = view.findViewById(R.id.icRadio)
         val container: View = view.findViewById(R.id.container)
+        val indicator: CardView = view.findViewById(R.id.indicatorPlaying)
     }
 }
-

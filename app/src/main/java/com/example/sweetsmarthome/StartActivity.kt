@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.sweetsmarthome.databinding.ContentStartBinding
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 
 class StartActivity : AppCompatActivity() {
 
@@ -13,7 +14,9 @@ class StartActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
+
 
         binding = ContentStartBinding.inflate(layoutInflater)
         setContentView(binding.root)

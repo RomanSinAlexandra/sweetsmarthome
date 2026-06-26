@@ -18,18 +18,18 @@ class RadioListFragment : Fragment(R.layout.fragment_radio_list) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rcRadio)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        recyclerView.adapter = RadioAdapter(RadioStations.list) { station ->
+        val adapter = RadioAdapter(RadioStations.list) { station ->
             viewModel.onStationClicked(station)
         }
-        val adapter = RadioAdapter(RadioStations.list) {
-            viewModel.onStationClicked(it)
-        }
-
         recyclerView.adapter = adapter
 
-        viewModel.currentStation.observe(viewLifecycleOwner) {
-            adapter.setSelectedStation(it)
+        // Наблюдаем за станцией И состоянием воспроизведения одновременно
+        viewModel.currentStation.observe(viewLifecycleOwner) { station ->
+            adapter.setStatus(station, viewModel.isPlaying.value ?: false)
         }
 
+        viewModel.isPlaying.observe(viewLifecycleOwner) { isPlaying ->
+            adapter.setStatus(viewModel.currentStation.value, isPlaying)
+        }
     }
 }

@@ -18,13 +18,42 @@
         tools:layout="@layout/fragment_list" />
 
     <fragment
+        android:id="@+id/WeatherFragment"
+        android:name="com.example.sweetsmarthome.weather.WeatherFragment"
+        android:label="Weather"
+        tools:layout="@layout/fragment_weather"
+        />
+
+    <fragment
         android:id="@+id/RadioFragment"
         android:name="com.example.sweetsmarthome.radio.RadioFragment"
         android:label="Radio"
         tools:layout="@layout/fragment_radio" />
 
+    <fragment
+        android:id="@+id/LedFragment"
+        android:name="com.example.sweetsmarthome.led.LedFragment"
+        android:label="Led"
+        tools:layout="@layout/fragment_led_main"
+        />
+
+    <fragment
+        android:id="@+id/FireplaceFragment"
+        android:name="com.example.sweetsmarthome.fireplace.FireplaceControlFragment"
+        android:label="Led"
+        tools:layout="@layout/fragment_fireplace"
+        />
+
         <action
             android:id="@+id/action_mainFragment_to_deviceListFragment"
             app:destination="@id/BluetoothFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_ledFragment"
+            app:destination="@id/LedFragment" />
+
+        <action
+            android:id="@+id/action_mainFragment_to_fireplaceFragment"
+            app:destination="@id/FireplaceFragment" />
 
 </navigation>

@@ -12,6 +12,11 @@
         android:title="Radio"/>
 
     <item
+        android:id="@+id/WeatherFragment"
+        android:icon="@drawable/ic_baseline_cloud_24"
+        android:title="Weather"/>
+
+    <item
         android:id="@+id/BluetoothFragment"
         android:icon="@drawable/ic_baseline_devices_24"
         android:title="Device list"/>

@@ -12,6 +12,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.example.sweetsmarthome.R
 import com.google.android.material.snackbar.Snackbar
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
+import android.view.animation.LinearInterpolator
 
 class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
 
@@ -22,6 +25,7 @@ class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
     private lateinit var btRandom: ImageButton
     private lateinit var rotateAnim: Animation
     private lateinit var tvTitleRadio: TextView
+    private var rotateAnimator: ObjectAnimator? = null
 
     private val viewModel: RadioViewModel by activityViewModels()
 
@@ -34,23 +38,31 @@ class RadioPlayerFragment : Fragment(R.layout.fragment_radio_player) {
         btPrev = view.findViewById(R.id.btPrev)
         btRandom = view.findViewById(R.id.btRandom)
         tvTitleRadio = view.findViewById(R.id.tvTitleRadio)
-
-        rotateAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate).apply {
-            repeatCount = Animation.INFINITE
+        val coverImage: ImageView = view.findViewById(R.id.cover)
+        rotateAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate)
+        rotateAnimator = ObjectAnimator.ofFloat(coverImage, View.ROTATION, 0f, 360f).apply {
+            duration = 10000 // Время одного полного оборота (10 секунд)
+            repeatCount = ValueAnimator.INFINITE // Крутить бесконечно
+            interpolator = LinearInterpolator() // Равномерная скорость (без ускорения/замедления)
         }
 
-        viewModel.isPlaying.observe(viewLifecycleOwner) { playing ->
-            playButton.setImageResource(
-                if (playing) R.drawable.ic_baseline_pause_24
-                else R.drawable.ic_baseline_play_arrow_24
-            )
+        viewModel.isPlaying.observe(viewLifecycleOwner) { isPlaying ->
+            if (isPlaying) {
+                // Если играет, ставим иконку ПАУЗЫ
+                playButton.setImageResource(R.drawable.ic_baseline_pause_24)
 
-            if (playing) {
-                if (cover.animation == null || cover.animation.hasEnded()) {
-                    cover.startAnimation(rotateAnim)
+                // Возобновляем анимацию вращения
+                if (rotateAnimator?.isPaused == true) {
+                    rotateAnimator?.resume()
+                } else if (rotateAnimator?.isStarted == false) {
+                    rotateAnimator?.start()
                 }
             } else {
-                cover.clearAnimation()
+                // Если на паузе, ставим иконку ПЛЕЙ
+                playButton.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+
+                // Ставим анимацию на паузу
+                rotateAnimator?.pause()
             }
         }
 
