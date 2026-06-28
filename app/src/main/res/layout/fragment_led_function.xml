@@ -5,13 +5,25 @@
     android:layout_height="match_parent"
     android:background="@drawable/led_func_bg">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcFunction"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <EditText
+        android:id="@+id/etSearchEffects"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/bg_radio_item" android:hint="Поиск эффекта..."
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:textColorHint="#A0A0A0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcFunction"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSearchEffects" /> </androidx.constraintlayout.widget.ConstraintLayout>

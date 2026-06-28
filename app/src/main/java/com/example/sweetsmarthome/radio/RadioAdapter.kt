@@ -11,16 +11,29 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetsmarthome.R
 
 class RadioAdapter(
-    private val stations: List<RadioStation>,
+    // Здесь мы берем исходный список как базу для фильтрации
+    private val originalStations: List<RadioStation>,
     private val onClick: (RadioStation) -> Unit
 ) : RecyclerView.Adapter<RadioAdapter.VH>() {
 
     private var selectedStation: RadioStation? = null
     private var isPlaying: Boolean = false
 
+    // ЭТОТ СПИСОК МЫ БУДЕМ ОТОБРАЖАТЬ
+    private var filteredList: List<RadioStation> = originalStations.toList()
+
     fun setStatus(station: RadioStation?, playing: Boolean) {
         selectedStation = station
         isPlaying = playing
+        notifyDataSetChanged()
+    }
+
+    fun filter(query: String) {
+        filteredList = if (query.isEmpty()) {
+            originalStations
+        } else {
+            originalStations.filter { it.name.contains(query, ignoreCase = true) }
+        }
         notifyDataSetChanged()
     }
 
@@ -31,21 +44,18 @@ class RadioAdapter(
     }
 
     override fun onBindViewHolder(holder: VH, position: Int) {
-        val station = stations[position]
+        // !!! ВАЖНО: берем станцию из filteredList !!!
+        val station = filteredList[position]
         val context = holder.itemView.context
 
         holder.title.text = station.name
         holder.icon.setImageResource(station.iconRadio)
 
         if (station == selectedStation) {
-            // Выделяем выбранную станцию
             holder.container.setBackgroundColor(ContextCompat.getColor(context, R.color.purple_700))
-
-            // Если выбрана и играет -> Green (соединение есть), иначе Red (пауза)
             val indicatorColor = if (isPlaying) R.color.green else R.color.red
             holder.indicator.setCardBackgroundColor(ContextCompat.getColor(context, indicatorColor))
         } else {
-            // Обычное состояние для невыбранных станций
             holder.container.setBackgroundResource(R.drawable.bg_radio_item)
             holder.indicator.setCardBackgroundColor(ContextCompat.getColor(context, R.color.gray_transparent))
         }
@@ -55,7 +65,8 @@ class RadioAdapter(
         }
     }
 
-    override fun getItemCount(): Int = stations.size
+    // !!! ВАЖНО: возвращаем размер filteredList !!!
+    override fun getItemCount(): Int = filteredList.size
 
     class VH(view: View) : RecyclerView.ViewHolder(view) {
         val title: TextView = view.findViewById(R.id.tvTitle)

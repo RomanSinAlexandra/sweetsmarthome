@@ -22,7 +22,7 @@ class LedFragment : Fragment(R.layout.fragment_led_main), View.OnTouchListener {
 
     // Идеальный современный способ подключения ViewModel!
     private val sharedViewModel: BluetoothSharedViewModel by activityViewModels()
-    private var isPowerOn = false
+    private var isPowerOn = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

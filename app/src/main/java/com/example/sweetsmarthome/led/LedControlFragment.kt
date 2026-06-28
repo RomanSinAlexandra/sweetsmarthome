@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.sweetsmarthome.BluetoothSharedViewModel
 import com.example.sweetsmarthome.R
 import com.google.android.material.card.MaterialCardView
@@ -18,7 +17,6 @@ import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
 import com.skydoves.colorpickerview.ColorEnvelope
 import com.skydoves.colorpickerview.ActionMode
 import me.tankery.lib.circularseekbar.CircularSeekBar
-import java.util.Collections.emptyList
 
 class LedControlFragment : Fragment(R.layout.fragment_led) {
 
@@ -26,7 +24,6 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
     private var lastCommandTime = 0L
     private var isPowerOn = false
     private lateinit var prefs: SharedPreferences
-    private var effectsAdapter: LedEffectsAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,24 +32,13 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
         val vmClass = Class.forName("com.example.sweetsmarthome.BluetoothSharedViewModel") as Class<BluetoothSharedViewModel>
         sharedViewModel = ViewModelProvider(requireActivity()).get(vmClass)
 
-        // Инициализируем хранилище настроек
         prefs = requireActivity().getSharedPreferences("LedControlPrefs", Context.MODE_PRIVATE)
 
-        // Используем безопасный вызов для всех элементов
         val btnPower = view.findViewById<ImageView>(R.id.btnPower)
         val sbBrightness = view.findViewById<SeekBar>(R.id.sbBrightness)
         val colorPicker = view.findViewById<ColorPickerView>(R.id.colorPicker)
         val currentCenterColor = view.findViewById<MaterialCardView>(R.id.currentColorCenter)
         val circularSeekBar = view.findViewById<CircularSeekBar>(R.id.circularSeekBar)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.rcFunction)
-
-        if (recyclerView != null) {
-            effectsAdapter = LedEffectsAdapter(LedFunction.effects ?: emptyList()) { selectedEffect ->
-                sendCommand("EFF:${selectedEffect.command}")
-                resetEffectSelectionUI() // Сброс, если нужно
-            }
-            recyclerView.adapter = effectsAdapter
-        }
 
         // --- ИНИЦИАЛИЗАЦИЯ СЕЛЕКТОРА ---
         colorPicker?.setActionMode(ActionMode.LAST)
@@ -62,7 +48,6 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
         val savedBrightness = prefs.getInt("brightness", 150)
         val savedColor = prefs.getInt("color", Color.WHITE)
 
-        // Оператор ?. защищает от краша, если view не найдена в XML
         btnPower?.alpha = if (isPowerOn) 1.0f else 0.4f
         sbBrightness?.progress = savedBrightness
         colorPicker?.setInitialColor(savedColor)
@@ -70,7 +55,6 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
         circularSeekBar?.progress = getHueFromColor(savedColor)
         circularSeekBar?.circleProgressColor = savedColor
 
-        // Синхронизация с лентой при открытии с небольшой задержкой
         view.postDelayed({
             sendCommand(if (isPowerOn) "PWR:1" else "PWR:0")
             sendCommand("BRT:$savedBrightness")
@@ -80,16 +64,15 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
         // --- ЛОГИКА ПИТАНИЯ ---
         btnPower?.setOnClickListener {
             isPowerOn = !isPowerOn
-            prefs.edit().putBoolean("power", isPowerOn).apply() // Сохраняем питание
+            prefs.edit().putBoolean("power", isPowerOn).apply()
             sendCommand(if (isPowerOn) "PWR:1" else "PWR:0")
             btnPower.alpha = if (isPowerOn) 1.0f else 0.4f
 
-            // ДОБАВЛЕНО: Если мы включили ленту с телефона — принудительно восстанавливаем цвет и яркость
             if (isPowerOn) {
-                val savedBrightness = prefs.getInt("brightness", 150)
-                val savedColor = prefs.getInt("color", Color.WHITE)
-                sendCommand("BRT:$savedBrightness")
-                sendColorCommand(savedColor)
+                val savedBrt = prefs.getInt("brightness", 150)
+                val savedClr = prefs.getInt("color", Color.WHITE)
+                sendCommand("BRT:$savedBrt")
+                sendColorCommand(savedClr)
             }
         }
 
@@ -102,12 +85,12 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
                 val hue = getHueFromColor(color)
                 circularSeekBar?.progress = hue
                 circularSeekBar?.circleProgressColor = color
-                resetEffectSelectionUI()
+                resetEffectSelectionUI() // <- Вызываем сброс
 
                 val currentTime = System.currentTimeMillis()
                 if (currentTime - lastCommandTime > 60) {
                     sendColorCommand(color)
-                    prefs.edit().putInt("color", color).apply() // Сохраняем цвет
+                    prefs.edit().putInt("color", color).apply()
                     lastCommandTime = currentTime
                 }
             }
@@ -123,11 +106,12 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
                     colorPicker?.setInitialColor(color)
                     currentCenterColor?.setCardBackgroundColor(color)
                     circularSeekBar?.circleProgressColor = color
+                    resetEffectSelectionUI() // <- Вызываем сброс
 
                     val currentTime = System.currentTimeMillis()
                     if (currentTime - lastCommandTime > 60) {
                         sendColorCommand(color)
-                        prefs.edit().putInt("color", color).apply() // Сохраняем цвет
+                        prefs.edit().putInt("color", color).apply()
                         lastCommandTime = currentTime
                     }
                 }
@@ -138,6 +122,7 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
 
         // --- ЛОГИКА ЯРКОСТИ ---
         sbBrightness?.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            // ... (остается без изменений)
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 if (fromUser) {
                     val currentTime = System.currentTimeMillis()
@@ -151,7 +136,7 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
                 val finalBrightness = seekBar?.progress ?: 0
                 sendCommand("BRT:$finalBrightness")
-                prefs.edit().putInt("brightness", finalBrightness).apply() // Сохраняем яркость
+                prefs.edit().putInt("brightness", finalBrightness).apply()
             }
         })
 
@@ -171,7 +156,7 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
             circularSeekBar?.progress = getHueFromColor(white)
             circularSeekBar?.circleProgressColor = white
             sendCommand("CLR:255,255,255")
-            resetEffectSelectionUI()
+            resetEffectSelectionUI() // <- Вызываем сброс
         }
 
         view.findViewById<MaterialCardView>(R.id.btnStandardRgb)?.setOnClickListener {
@@ -192,16 +177,16 @@ class LedControlFragment : Fragment(R.layout.fragment_led) {
             circularSeekBar?.progress = getHueFromColor(color)
             circularSeekBar?.circleProgressColor = color
             sendCommand("CLR:$r,$g,$b")
-            prefs.edit().putInt("color", color).apply() // Сохраняем цвет плитки
+            prefs.edit().putInt("color", color).apply()
 
-            // ДОБАВЛЕНО: Сбрасываем эффект при нажатии на плитку цвета
             prefs.edit().putInt("effect", 0).apply()
-            resetEffectSelectionUI()
+            resetEffectSelectionUI() // <- Вызываем сброс
         }
     }
 
+    // ЗДЕСЬ МЫ ОТПРАВЛЯЕМ СИГНАЛ ВТОРОМУ ФРАГМЕНТУ!
     private fun resetEffectSelectionUI() {
-        effectsAdapter?.clearSelection()
+        sharedViewModel.clearEffectSelectionEvent.value = true
     }
 
     private fun sendColorCommand(color: Int) {
